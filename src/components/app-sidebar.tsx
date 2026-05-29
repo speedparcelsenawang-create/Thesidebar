@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Home, Server } from "lucide-react"
 
+import { SearchForm } from "@/components/search-form"
 import {
   Sidebar,
   SidebarContent,
@@ -31,7 +32,16 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const location = useLocation()
-  
+  const [searchTerm, setSearchTerm] = React.useState("")
+
+  const filteredNav = React.useMemo(
+    () =>
+      data.navMain.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      ),
+    [searchTerm]
+  )
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -52,18 +62,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
+        <SearchForm
+          onSubmit={(event) => event.preventDefault()}
+          inputProps={{
+            id: "sidebar-search",
+            value: searchTerm,
+            onChange: (event) => setSearchTerm(event.target.value),
+            placeholder: "Search pages...",
+          }}
+        />
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild isActive={location.pathname === item.url}>
-                  <Link to={item.url}>
-                    {item.icon && <item.icon className="size-4" />}
-                    <span>{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {filteredNav.length === 0 ? (
+              <div className="px-4 py-3 text-sm text-sidebar-foreground/70">
+                No matching pages found.
+              </div>
+            ) : (
+              filteredNav.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
+                    <Link to={item.url}>
+                      {item.icon && <item.icon className="size-4" />}
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))
+            )}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
