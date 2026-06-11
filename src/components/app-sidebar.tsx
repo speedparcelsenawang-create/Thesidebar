@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Home, Server } from "lucide-react"
+import { Home, MapPin, Server } from "lucide-react"
 
 import { SearchForm } from "@/components/search-form"
 import {
@@ -26,6 +26,11 @@ const data = {
       title: "Plano Vm",
       url: "/plano-vm",
       icon: Server,
+    },
+    {
+      title: "Route List",
+      url: "/route-list",
+      icon: MapPin,
     },
   ],
 }

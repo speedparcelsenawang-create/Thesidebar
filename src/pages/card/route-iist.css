@@ -1,0 +1,327 @@
+.route-iist {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: var(--foreground);
+}
+
+.route-iist__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 1rem;
+  padding: 2rem 0 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.route-iist__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.route-iist__add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.route-iist__add-button:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--primary) 90%, black 10%);
+}
+
+.route-iist__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.route-iist__label:hover {
+  transform: translateY(-1px);
+}
+
+.route-iist__label--active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+}
+
+.route-iist__label--filter {
+  position: relative;
+}
+
+.route-iist__label::after {
+  content: "×";
+  display: inline-block;
+  color: transparent;
+  width: 0.5rem;
+  font-weight: 400;
+  transform: scale(0);
+  transition: transform 150ms ease-in-out;
+}
+
+.route-iist__label--clear {
+  color: #f68185;
+  opacity: 0;
+  transform: translate3d(-25%, 0, 0);
+  pointer-events: none;
+  transition: all 275ms ease-in-out;
+}
+
+.route-iist__label--filter ~ .route-iist__label--clear {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+}
+
+.route-iist__label--filter::after,
+.route-iist__label--active::after {
+  transform: scale(1);
+}
+
+.route-iist__label--filter::after {
+  content: "•";
+  color: #46d2c4;
+}
+
+.route-iist__label--active::after {
+  content: "×";
+  color: #f68185;
+}
+
+.route-iist__dropdown {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.filters {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0.5rem 1rem 1rem;
+}
+
+.filters__rating {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--popover);
+  border: 1px solid var(--border);
+}
+
+.filters__range {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.filters__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1rem;
+  border-radius: 9999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.filters__item:hover {
+  transform: translateY(-1px);
+}
+
+.filters__item--active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+}
+
+.route-iist__list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.company {
+  display: grid;
+  gap: 1rem;
+  min-height: 220px;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .route-iist__list {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .route-iist__list {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+  }
+}
+
+.company__info {
+  display: grid;
+  gap: 1rem;
+}
+
+.company__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.company__logo {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  color: white;
+}
+
+.company__name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.company__slogan {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.company__details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: var(--muted);
+}
+
+.company__data {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.company__label {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.company__country,
+.company__rating {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.company__country {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.company__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.route-iist__empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.route-iist__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.35);
+  padding: 1rem;
+}
+
+.modal__content {
+  position: relative;
+  width: min(580px, 100%);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+}
+
+.modal__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.modal__link {
+  text-align: center;
+  margin: 1rem 0 0.5rem;
+}
+
+.modal__link a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: var(--muted);
+  color: var(--foreground);
+  display: grid;
+  place-items: center;
+}
+
+@media (max-width: 640px) {
+  .route-iist__nav {
+    gap: 0.5rem;
+    margin: 0;
+    padding: 1.5rem 0 0.75rem;
+  }
+
+  .company__details {
+    grid-template-columns: 1fr;
+  }
+}

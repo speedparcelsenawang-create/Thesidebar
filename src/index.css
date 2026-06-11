@@ -61,3 +61,19 @@
     @apply bg-background text-foreground;
     }
 }
+
+.app-page-transition {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.app-page-transition--hidden {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.app-page-transition--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
